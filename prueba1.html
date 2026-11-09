@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecociencia - I.E. Caguancito</title>
+    <style>      
+
+	   * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+			
+        }
+
+        /* Header / Navbar superior */
+        header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 20px;
+            height: 50px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .menu-toggle {
+            font-size: 20px;
+            cursor: pointer;
+            color: #555;
+        }
+
+        .logo-moodle {
+            font-weight: bold;
+            font-size: 22px;
+            color: #f25c05;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #f1f3f4;
+            border-radius: 4px;
+            padding: 4px 10px;
+            width: 300px;
+        }
+
+        .search-bar input {
+            border: none;
+            background: transparent;
+            outline: none;
+            padding-left: 8px;
+            width: 100%;
+            font-size: 13px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .avatar {
+            width: 30px;
+            height: 30px;
+            background-color: #ccc;
+            border-radius: 50%;
+        }
+
+        /* Layout Principal */
+        .layout-container {
+            display: flex;
+            flex: 1;
+        }
+
+        /* Menú Lateral Izquierdo */
+        aside.sidebar {
+            width: 230px;
+            background-color: #0d47a1;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 15px 0;
+        }
+
+        .sidebar nav ul {
+            list-style: none;
+        }
+
+        .sidebar nav ul li a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .sidebar nav ul li a:hover,
+        .sidebar nav ul li.active a {
+            background-color: #1565c0;
+        }
+
+        .sidebar-footer {
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.3;
+        }
+
+        /* Área de Contenido Principal */
+        main.main-content {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .content-left {
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Banner Promocional Ecociencia */
+        .banner {
+            background: linear-gradient(135deg, #0288d1, #004d40);
+            color: white;
+            border-radius: 8px;
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner-text h1 {
+            font-size: 32px;
+            margin-bottom: 5px;
+        }
+
+        .banner-text p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Sección Bienvenido */
+        .welcome-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .btn-cursos {
+            display: inline-block;
+            background-color: #00897b;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+
+        /* Rejilla de Cursos */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .course-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-img {
+            height: 100px;
+            background-color: #e0e0e0;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .course-info {
+            padding: 12px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .course-info h3 {
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .course-info p {
+            font-size: 11px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar-bg {
+            background-color: #e0e0e0;
+            height: 4px;
+            border-radius: 2px;
+            margin-bottom: 6px;
+        }
+
+        .progress-bar-fill {
+            background-color: #4caf50;
+            height: 100%;
+            border-radius: 2px;
+        }
+
+        /* Columna Derecha */
+        .content-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .widget-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .widget-card h3 {
+            font-size: 14px;
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        /* Pie de página general */
+        footer.main-footer {
+            background-color: #0d47a1;
+            color: #ffffff;
+            font-size: 11px;
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Principal -->
+    <header>
+        <div class="header-left">
+            
+        </div>
+        <div class="header-right">
+            <span>&#128276;</span>
+            <span>&#128172;</span>
+            <div class="user-profile">
+                <div class="avatar"></div>
+                <span>Juan Carlos Parada</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal con Menú y Contenidos -->
+    <div class="layout-container">
+        
+        <!-- Lista / Menú Lateral Izquierdo -->
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li class="active"><a href="#pagina-principal"><span>&#127968;</span> Página principal</a></li>
+                    <li><a href="#area-personal"><span>&#128100;</span> Área personal</a></li>
+                    <li><a href="#calendario"><span>&#128197;</span> Calendario</a></li>
+                    <li><a href="#mis-cursos"><span>&#128218;</span> Mis cursos</a></li>
+                    <li><a href="#archivos-privados"><span>&#128193;</span> Archivos privados</a></li>
+                    <li><a href="#banco-contenido"><span>&#128451;</span> Banco de contenido</a></li>
+                    <li><a href="#administracion"><span>&#9881;</span> Administración del sitio</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <p><em>Aprender para cuidar nuestro territorio</em></p>
+            </div>
+        </aside>
+
+        <!-- Área de Contenido -->
+        <main class="main-content">
+            
+            <div class="content-left">
+                <!-- Banner de Portada -->
+                <section class="banner">
+                    <div class="banner-text">
+                     <img src="imagenes/superior.jpg" alt="Descripción de la imagen" width="700">      
+                    </div>
+                </section>
+
+                <!-- Bienvenida -->
+                <section class="welcome-card">
+                    <div>
+                        <img src="imagenes/bienvenida.jpg" width="700">
+                        <a href="#mis-cursos" class="btn-cursos">Ver mis cursos &gt;</a>
+                    </div>
+                </section>
+
+                <!-- Mis Cursos -->
+                <section>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <h3>Mis cursos</h3>
+                        <a href="#todos-los-cursos" style="font-size: 12px; color: #0288d1; text-decoration: none;">Ver todos los cursos &gt;</a>
+                    </div>
+                    
+                    <div class="courses-grid">
+                        <article class="course-card">
+                            <div class="course-img" style="background-color: #81c784;">
+							 <center><img src="imagenes/biologia.jpg" style="width: 160px; height: auto;"></center>
+							</div>
+                            <div class="course-info">
+                                <div>
+                                    <h3>Biología</h3>
+                                    <p>La vida en sus diferentes formas</p>
+                                </div>
+                                <div></div>
+                            </div>
+                        </article>
+						<article class="course-card">
+                            <div class="course-img" style="background-color: #64b5f6;">
+							<center><img src="imagenes/quimica.jfif" style="width: 152px; height: auto;"></center>
+							</div>
+							<div class="course-info">
+                                <div>
+                                    <h3>Química</h3>
+                                    <p>La materia y sus transformaciones</p>
+                                </div>
+                                <div></div>
+                            </div>
+                        </article>
+
+                        <!-- Tarjeta Física -->
+                        <article class="course-card">
+                            <div class="course-img" style="background-color: #4dd0e1;">
+							<center><img src="imagenes/fisica.jfif" style="width: 138px; height: auto;"></center></div>
+                            <div class="course-info">
+                                <div>
+                                    <h3>Física</h3>
+                                    <p>Energía, movimiento y entorno</p>
+                                </div>
+                                <div></div>
+                            </div>
+                        </article>
+
+                        <!-- Tarjeta Proyecto Ambiental -->
+                        <article class="course-card">
+                            <div class="course-img" style="background-color: #aed581;">
+							<center><img src="imagenes/proyecto.jfif" style="width: 177px; height: auto;"></center></div>
+                            <div class="course-info">
+                                <div>
+                                    <h3>Proyecto Ambiental</h3>
+                                    <p>Ciencia y comunidad</p>
+                                </div>
+                                <div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Columna Derecha de Progreso y Calendario -->
+            <div class="content-right">
+                <section class="widget-card">
+                    
+                </section>
+
+                <section class="widget-card">
+                    <h3>Calendario</h3>
+					<label for="calendario">Elige una fecha:</label>
+					<input type="date" id="calendario" name="fecha">
+                </section>
+
+                <section class="widget-card">
+                    
+                </section>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Footer de la Plataforma -->
+    <footer class="main-footer">
+        <div>Ecociencia - I.E. Caguancito | Garzón - Huila</div>
+        <div>Plataforma educativa Moodle | Construyendo conocimiento para un mejor entorno</div>
+    </footer>
+
+</body>
+</html>
